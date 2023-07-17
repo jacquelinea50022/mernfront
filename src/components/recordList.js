@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Record = (props) => (
   <tr>
     <td>{props.record.name}</td>
-    <td>{props.record.position}</td>
-    <td>{props.record.level}</td>
+    <td>{props.record.email}</td>
+    <td>{props.record.entry}</td>
     <td>
       <Link className="btn btn-link" to={`/edit/${props.record._id}`}>
         Edit
@@ -28,7 +28,7 @@ export default function RecordList() {
 
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5050/record/`);
+      const response = await fetch(`http://localhost:5050/`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -44,7 +44,7 @@ export default function RecordList() {
   }, []);
 
   async function deleteRecord(id) {
-    await fetch(`http://localhost:5050/record/${id}`, {
+    await fetch(`http://localhost:5050/${id}`, {
       method: "DELETE",
     });
 
@@ -63,17 +63,17 @@ export default function RecordList() {
       );
     });
   }
-
+ 
   return (
-    <div>
-      <h3>Record List</h3>
+    <div className="purpe-bg">
+      <h3 style={{ color: "#2e0575"}}>Blog List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
-        <thead>
+        <thead> 
           <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Level</th>
-            <th>Action</th>
+            <th style={{ color: '#2e0575' }}>Name: </th>
+            <th style={{ color: '#2e0575' }}>Email: </th>
+            <th style={{ color: '#2e0575' }}>Entry: </th>
+            <th style={{ color: '#2e0575' }}> Action</th>
           </tr>
         </thead>
         <tbody>{recordList()}</tbody>
